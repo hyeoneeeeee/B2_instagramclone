@@ -77,11 +77,3 @@ def log_out(request):
     auth.logout(request)
     return redirect('/')
 
-
-# def sign_up_view(request):
-# def follow(request)
-<<<<<<< HEAD
-# def followee(request)
-=======
-# def followee(request)
->>>>>>> b4924ab28c4a56825b6ef9ffa20301d2bb2be300

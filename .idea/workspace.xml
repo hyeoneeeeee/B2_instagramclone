@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2896e773-bc8b-4113-8c55-9e98679b2722" name="변경" comment="" />
+    <list default="true" id="2896e773-bc8b-4113-8c55-9e98679b2722" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/B2_instagramclone/templates/post/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/B2_instagramclone/templates/post/my_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1664501962318</updated>
       <workItem from="1664501963645" duration="698000" />
-      <workItem from="1664542434380" duration="1135000" />
+      <workItem from="1664542434380" duration="1342000" />
     </task>
     <servers />
   </component>
