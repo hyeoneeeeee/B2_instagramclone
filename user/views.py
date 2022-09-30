@@ -78,10 +78,3 @@ def log_out(request):
 # def sign_up_view(request):
 # def follow(request)
 # def followee(request)
-
-
-<<<<<<< HEAD
-# ddddrr
-=======
-# rrrrr
->>>>>>> master
