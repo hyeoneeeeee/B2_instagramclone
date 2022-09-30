@@ -29,9 +29,12 @@ def sign_in_view(request):
             me = auth.authenticate(request, user_id=user_id, user_password=user_password)
             if me:
                 auth.login(request, me)
-                return render(request, 'home.html')
+                return render(request, 'home.html') ('/')
             else:
                 return render(request, 'user/signin.html')
+        else:
+            return render(request, 'user/signin.html')
+
 
 def sign_up_view(request):
     if request.method == "GET":
@@ -78,10 +81,3 @@ def log_out(request):
 # def sign_up_view(request):
 # def follow(request)
 # def followee(request)
-
-
-<<<<<<< HEAD
-# ddddrr
-=======
-# rrrrr
->>>>>>> master
