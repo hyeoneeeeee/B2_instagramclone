@@ -13,4 +13,4 @@ class UserModel(AbstractUser):
     user_create_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user_id} / {self.user_nick_name}'
+        return f'{self.user_nick_name}'
