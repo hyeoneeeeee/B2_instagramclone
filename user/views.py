@@ -77,7 +77,6 @@ def sign_up_view(request):
                 new_user.save()
     return redirect('/sign_in')
 
-
 @login_required
 def log_out(request):
     auth.logout(request)
