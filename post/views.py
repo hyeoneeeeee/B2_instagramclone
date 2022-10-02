@@ -18,7 +18,7 @@ def write(request): # 게시글 작성 페이지
             return render(request, 'post/new_post.html')
         else:
             return redirect('/sign-in')
-        
+
     elif request.method == 'POST':
         user = request.user
         new_post = PostModel()
