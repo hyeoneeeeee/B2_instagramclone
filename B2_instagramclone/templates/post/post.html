@@ -44,7 +44,7 @@
         .all_post {
             border: 1px solid lightgray;
             border-radius: 3px;
-            background-color: yellow;
+            background-color: white;
             color: black;
             width: 1100px;
             margin: auto auto 1rem auto;
@@ -54,7 +54,7 @@
 
         .postbox {
             /* border: 1px solid blue; */
-            background-color: blue;
+            background-color: white;
             width: 100%;
             text-align: left;
         }
@@ -69,38 +69,22 @@
              src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
         <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
         <div style="display: flex; flex-direction: row; align-items: center; ">
-            <span class="material-icons navi_icons go_home">home</span>
-            <span id="add_feed" class="material-icons-outlined navi_icons">add_box</span>
-            <span class="material-icons-outlined navi_icons">explore</span>
-            <span class="material-icons-outlined navi_icons ">
-                    favorite_border
-                </span>
-            <div style="float: right">
-                                    <a href="/logout" class="btn btn-primary">로그아웃임시</a>
-                                </div>
-            <div class="dropdown" style="position: relative; z-index: 9999">
-                <div class="navi_profile_box" id="dropdownMenuButton1"
-                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="profile_img"
-                         src="{{ user.thumbnail }}">
-                </div>
-
-                <ul class="dropdown-menu" style="left: -130px" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">프로필</a></li>
-                    <li><a class="dropdown-item" href="#">저장됨</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="...">로그아웃</a></li>
-                </ul>
-            </div>
+            <span onclick="location.href=''" class="material-icons navi_icons go_home" title="홈페이지">home</span>
+            <span onclick="location.href='/write'" id="add_feed" class="material-icons-outlined navi_icons" title="글쓰기">add_box</span>
+            <span onclick="location.href='/myprofile'" class="material-icons navi_icons person" title="내 프로필">person</span>
+            <span onclick="location.href='/logout'" class="material-icons navi_icons logout" title="로그아웃">logout</span>
+            <span>{{ user.user_nick_name }}님 환영합니다!</span>
         </div>
     </div>
 </nav>
+{#게시물 표시 부분#}
 <div class="all_post">
     <div class="row">
         {% for post in posts %}
             <div class="postbox">
+                {#게시물 작성자#}
+                <div style="color: black">{{ post.author.user_nick_name }}</div>
+                {# 게시물 카드 #}
                 <div class="card mb-3" style="max-width: 1080px; padding: 20px">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -109,12 +93,16 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h4 class="card-text">{{ post.content }}</h4>
-                                <p class="card-text"><small
-                                        class="text-muted">{{ post.author.username }}-{{ post.created_at|timesince }}
-                                    전</small></p>
+                                <p class="card-text" ><small
+                                        class="text-muted">{{ post.created_at|timesince }}전</small></p>
                                 <div style="float: right">
                                     <a href="/post/{{ post.id }}" class="btn btn-primary">상세보기</a>
                                 </div>
+                                {% if post.author.user_nick_name == user.user_nick_name %}
+                                <div style="float: right">
+                                    <a href="/post/delete/{{ post.id }}" class="btn btn-danger">삭제하기</a>
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -122,6 +110,7 @@
             </div>
         {% endfor %}
     </div>
+</div>
 
 </body>
 </html>
