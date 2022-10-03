@@ -18,7 +18,7 @@ def write(request): # 게시글 작성 페이지
     if request.method == 'GET':
         user = request.user.is_authenticated
         if user:
-            return render(request, 'post/new_post.html')
+            return render(request, 'post/write.html')
         else:
             return redirect('/sign-in')
 
@@ -32,7 +32,16 @@ def write(request): # 게시글 작성 페이지
 
 
 def my_profile(request): #나의 프로필 페이지
-    return render(request, 'post/my_profile.html')
+    if request.method == 'GET':
+        user = request.user.is_authenticated
+        if user:
+            return render(request, 'post/my_profile.html')
+        else:
+            return redirect('/sign-in')
+
+    elif request.method == 'POST':
+        user = request.user
+        # 이후 추가 작성 예정
 
 
 def detail_post(request, id):
