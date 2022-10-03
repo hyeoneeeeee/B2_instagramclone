@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2896e773-bc8b-4113-8c55-9e98679b2722" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/post/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/B2_instagramclone/templates/post/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/B2_instagramclone/templates/post/my_profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/B2_instagramclone/templates/post/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/B2_instagramclone/templates/post/post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/post/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/post/migrations/0002_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/post/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/B2_instagramclone/templates/post/write.html" beforeDir="false" afterPath="$PROJECT_DIR$/B2_instagramclone/templates/post/write.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/__init__.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +85,7 @@
       <workItem from="1664501963645" duration="698000" />
       <workItem from="1664542434380" duration="1342000" />
       <workItem from="1664704633673" duration="15326000" />
-      <workItem from="1664784010948" duration="23603000" />
+      <workItem from="1664784010948" duration="23896000" />
     </task>
     <servers />
   </component>
