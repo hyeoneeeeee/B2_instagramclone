@@ -21,20 +21,6 @@
             padding-right: 5px;
         }
 
-        .navi_profile_box {
-            width: 30px;
-            height: 30px;
-            border-radius: 70%;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .profile_img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .navi_icons {
             padding-right: 18px;
             font-size: 28px;
@@ -46,7 +32,7 @@
             border-radius: 3px;
             background-color: white;
             color: black;
-            width: 1100px;
+            width: 750px;
             margin: auto auto 1rem auto;
             padding: 60px 20px 20px 20px;
             /* box-shadow: 0px 0px 3px 0px white; */
@@ -58,6 +44,20 @@
             width: 100%;
             text-align: left;
         }
+
+        .img_box {
+            width: 700px;
+            height : 400px;
+            object-fit: contain;
+            background: black;
+        }
+
+        .icon_box {
+            padding: 5px 5px 0px 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
     </style>
 </head>
 
@@ -79,37 +79,41 @@
 </nav>
 {#게시물 표시 부분#}
 <div class="all_post">
-    <div class="row">
-        {% for post in posts %}
+    <hr>
+    {% for post in posts %}
+        <div class="row">
             <div class="postbox">
-                {#게시물 작성자#}
-                <div style="color: black">{{ post.author.user_nick_name }}</div>
-                {# 게시물 카드 #}
-                <div class="card mb-3" style="max-width: 1080px; padding: 20px">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="..." class="img-fluid rounded-start" alt="...">
+                <div style="color: black"><h3>{{ post.author.user_nick_name }}</h3></div>
+                <img class="img_box" onclick="location.href='/post/{{ post.id }}'"
+                     src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw8PDw8PDQ8PDw0NDQ0NDw0NDw8NDQ0NFREWFxURFRUYHSggGBolGxUVIT0hJSksLi4uFx8zODMsNygtLisBCgoKDg0OFw8QFy0eHR8rLSsvLSstKy0tKy4tKy0rLS0rLS0tKy0tLSsxLS0rLS0tKysrNy8xKystLTA3Ky0rL//AABEIAUsAmAMBIgACEQEDEQH/xAAcAAADAAIDAQAAAAAAAAAAAAAAAQIDBQQGBwj/xAA9EAACAgECAwYEBAIIBwEAAAAAAQIDEQQSBSExBhNBUWFxB4GRoRQiMrFywRUjM0JEUpKiNENUYsLR0xb/xAAaAQADAQEBAQAAAAAAAAAAAAAAAQIDBAUG/8QAJhEBAAICAgICAgIDAQAAAAAAAAECAxESIQQxQVETInGRYaHhFP/aAAwDAQACEQMRAD8A8hABHY1MAAQIBgBEAxiIhDHgQSBQgJIYKACRgMFAMkYFgyNCYwxtAWAyUAgBqYAAAFqARiXkei2xtYAyNZIwRMAhgAiIBgBGoN9AlU/I7F2S4hoqbF+O0MdXBvqr7qbIL0jGWyXs180exV9geCcS00b9Cp0qxcp1WTlsmusZ1zbSa8lj38TK2TjJvnnAjtvbXsbqOG27LUpVzy6r4J93bFdfZrlmPhnxXM6o0aVtFo3BTCAwVgMFpQBWAGScjRJcWitNdq2oeETuBSH0R7RqItwJinQVkbZKYE7AaK2klZJ6I0kDRO8eSuiKLaZ678DeLTWpt0zear6XZt8rYNYa94uWfaPkeSwhk9a+CvCJ99bqmmq6qnTF4/VbNptL2in/AKkc3kaiu1Q9L7dcGjrdBqKpJOcYSupfjG6CbWPfnH2kz5c1UMSZ9ZcR1Sp091tjxGqmyx58oxbPlDWv83sc/h3m02gT6cYGigPQZpwIrAFFtxwQsjRTQxoQIkKGiRiCgEh5JC0gZCHkJkDBueznDKtVcqrdTXpXP9Fl8ZOmU/8ALKaf5Pdpr2NMZK7MEzE6J7Twb4PbZRlq9VB18nt00W3Nfxy6fRnp2g0FOlqjVRCNdVUeUV0Xi22+r8cs+aOE9sddpYqGn1V1cF0gp7q17RllL6D4r2y12qi436q6yD6wcttb94xwn9DgyePlyTqbdL3D0P4q9uq7K5aHRzU4Nr8RdB5jLDyq4vxWebfpjzPHLJZeSrLXJgo+Z2ePgjFXUM7W2jAYKccCOjSJksAUA07cEaFkCmygEBIVkeSRiCsjRI0SahiBCJQCGANF7SYsrJURBHgpZEmPJXSJMloeQwNMyW0YZArpLXATkYm6sjyQMQUNEoYpCxogpEmsCShAxklARoolMEwTKx5JyGR6TKkNMjI8lQmVOQEZAomvBCAGyiiUxoApDJGhGoaJGSFJlEIeQCh5IyGRBkyNMxpjQJlkyMhFFIkwEA0mAgGTgALIA3MaJGAWmMjIZEa8lZMaY0xBeQySGQCh5ITKQiUmVkhFJgmVpjyShoaJUAgGRgAhk4AxAJuYAAAAAADyNMkaAKyMgaAKGiRgS0NEJjTDRSyIpGNMpMaJWGSUMCMBDGTggAEtwMQADAAAAAAAZUUI5XCtL3+ooozt7++qnd/l3zUc/cA4wz6A4fwynRKMNJw3SJYx+IugtRfL1cpeP2NhxTgOn1lDetooltxKPd1QqnGS6JSik8ea8Uckebin01nBePcPm7JSPZpO6l4jGDpXJVbI92o+W3GME/0PwXWctVpnpbX/AM7SPuufnt/T9jauetkWxWr7eSaLRW3NqqDltw5Pkoxz0y3yRilFxbjJYlFuLT6qSeGj3K/smowjDh6rs00P0wpknb6ynF85SfnzPK+3PCrNLrZqyucI2qFsd0JRTbityWf+5MqmTlOmdq6jbRJlIx5Gmas5WBOQAnEAMgS3AAAAAAZAGAhoDUk/ry+ZytDqHp9RVbyk9PfXb+VqSlsmpcn49DjJDwM9PrWenhOEJxScZxUovwcWspmo7Q8RroVNby5X3RpjGCTab8X5Jf8Ao1Xwg7SQ1vDoaacl+K4fGNMoPrPTrlVYvNYxF+sfVGw41XZG1TdavipTVcK64KymWMRnulLxjuTfLqj5rLScV5rLvw25R21epqXkabXaaOGzdS1VcnGDlGF0ty7mUouxSjncsLr0fPxR1jjGttV19bhtprhUoWNNOyyUdzw+jSzjC6Y9TXBy3ppfWnAp1sq5ZjJpp8mm0djr7WTsr7nVwq1dD616mEbF9/H1OnZGpM9JwzESw9sezmkdctTw6MqNic7dJKbsr2eM6pPmsddrzyzhrGH0U7vxjWOGmu5/qrlUvVzW39m38jo2TqxWmY7c+SsRPS8gTkDVk44CGS2ADhByajFOUpNJRisuTfRJeLOz6Hhehrkq9R3uovT/ADxqsjVp634wUsNza81heWeopnRurgew9l+yHCJ2wnZVd/aVWKF9ivp2xzmO2Ki3F5Wct9F4ZT8x7ScKei1l+lc+8dFmzvNjqU+SeVF9Fz5ea5k1vFrTWFTWY7lrUi0ggjNCJciIW64KbWXKtNpThhNx8Hh/tyMup0Uq4xmsTqtX5LUv9rX92XLp7iqpcmlFNt8kl1bOy8G0feaKyMk3CUp4eMqL5Yf+pfYwy5eERLv8Tx//AEWtT1OpmP5j4/j/AIXwont41oc2OtSsti2pOO/+pm4wfmnJRWPHJ9EanS5bZ8nQm4uM4NxnFxnGUW4yjJc0010afieqdlvjNZWo1cUq76KxH8VSkrcec4dH7rHsc3m+NbLMWr3pzY78XoHEtBFxmsbHJxk5wxGe6ONss45tYXU8z7SQkre7i99WVPN07LJwsXJteaaxyysc/M9bfENPqdPG+mWa7qu8rm04qUWuXX9jxvieozdYn1Umjk8av7Tv4dF7TNdsSKFAtR8zs2w00/a/TTWmpt5d075QkvHfszB+2FZ9DqSZ61p9VCdMtNfXC3TWfqrmllPwlGS5xfqjzXtBw38LqJ0puUOU6pSxmVUucc+q5r3TOrDbrTmyV724AycgbM9MQHrGh+GegSXf6nU2Px7vuqYv5NSf3N9pexvBK8P8J3jXjbdfP6rck/oYzk+oltwl5B2er2zd7WZQzXp4+NmqksJr+BPfnwezzR3fs32Lquad11qnlPGncK4p56LdFv58vY53bfT6SvUaD8NRVSoVazLrio7v7JRXsk5YXhufmcns5xFRklkw8jJfhuvUtsNI329G4bwSMH3ik5valmeHZyWM7l1Z5X8V+y+s1Wuqt0ekuuUtNGuydVcpRVkbJ43S6Z2uHyR67wjiUXFczWLiFldupjY4Ov8AES7lrO9VuEJbZeeJSlz8sLwODwr25de4hrmr8S8Lr+HfGH/gLfnOmP7yObT8NuNf9C/nqdFH97T2pcX9SNZxFzpuhB4nOm2EWuqk4NL7s7rZc31DOuOszEbec9jfh/fqKrbE4RntlX3kp/kUmuca5RUk2k+csNc0lnmbXV8AvWns0PC6lqLKWlfbGcKqlak4xrjKySyoZk/Nyb6JHfexHEdO9FTCE4qdScbKspTjJzbcseT659TrWp1eo0U3oanW+91DtjqK7E7O7c03uiucXhdX4J4z1PJrnvkyzFv6e1jm0WvhpEV49Rvrr5tM/P3/AFPxDzKz4Z8Z8NFn21Wi/wDqcWz4ccZX+Bn8rtNL9pnus+LLzMf9MLzPWjJn+oeLwr9tb2A0+pp4ZTptdTKq2h2VbLNslKvc5Raw2uksfI4/FOxuitm7I95VY3l93PMG/WMk/tg3keJKxqOeb6e5jtmzyvJjJjyTbet9urDqa6+nn+t4ZGiezfv8nt2/zZw9Zpm8QrWZSlFfLK5fyN1xr/iFk5Wl0qWLp/ljFpx85yXl6GuO86iZk71j4dajXKuTjNNSi8NPqmjQdvtPmOnvXVOdEn6fqh/5nb+I3d9bKx4zKTbaWMtvqRHgun1qen1UrI147yM6nGM42R5L9Saxhs9DHaY1MuLJG9xDyLIHpms+FtL56fXtLwhfSpf7oyX7DOr8lWHCQ+P+v3JfaHHidY7ub8AWlmz0eMfTPctxxficNRGH5ttlUnOEn05rEov0ax9EcHT8Q2Tw3iUUpNdcLCeeXhhowQ0En/eS+5yquGJtudknuSjLGFuWU8N9fBfQ5s2CbzGmuPJxd47M8edkX3f9ZKCzti+b/mZJ8QlJtyeZSbk/Dm3nl5I69w2tVR2QlOMMye3vJ4e5YeVnnyNipHP4/ifitaZ136b5c35IjTZR1LMr4hCuLsumoVxWW2+b9EcLT1uRm1fZ38TFRslPampKMXFLcuj6F54/WYrOpLHHfcbhx6bY62FlstOqlv3UNflnbSksyl/E8837nV+D8fu02LbIRnp5zlVJpRU6mn0eOcf54Zv+KcC4jUs6O5tya3O6W5qPPplNGl//ACmo/NKyUYynlyUVmLz1XseZh8Lje37dda+967/27MnlXmkV7/zHxp22viULIqdU1OEujX7NeDE9V6nWeH8Jnpk4xnJxby08Yz9MnNy/FnrY6zxjl7cVp76bvT8R2ThN81CcZNeaT5o33GuMwrrdkEp8lJRzhSi/U6PvMGoulhpSkk+scvb9Dm8zwvzzWYnUwrDm4b29C1PC9LdXTq5tuEu7ntTxKcGt230z0+Z1HtNx6Ns8Qgq4JpKEeSil0Rrocdsp0vcJObhPdU287VnO15fTOfqaTierjP8AOsx3c9rxmL8UeXHiZMVv3jqPUumMtbV6ntvKtQmuvsH9IKt/qxJ/ZHXKeI7Y+eOi8zhzvcm23lvmet4mKZnnb04s1tdQ7iuMv/N9wOnxtA9LjX6c25cvvA7w4jsDvDQnMVhlhca/vBq0A29epObptSdeVxnq1WDO1WlbO9cO1K5HYdNrInmmn4jjxNhXxhrxOLLhmzprkh6DPWRwavW6qPM6rLjT8zjXcVb8TOnjzErnJDa6u9Gus1CNbdr8+JxZ6s6600wtfbaT1RxrdQa6WoMbuNYqymzl2XZOPKZhdpDsKiEzLLOb8kzE7V4xDvBOaZWkjdH2GQ4oQgjcG4gBmveG8gADJvGrDEAgzq5lrUs4o8i0e3K/FPzJeoZx8hkNDbN3zJdjMYhjbI5icyAAK3BuJANkrcG4kA2FbgJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4HgBtIFYHtAtowPBe0e0ByY8BgybQ2gXJjwGDJtDaA5MeAwZNobQHJjwGDJtFtAcmMC9oYA9oArAsAeyAAAMiQ8GRRGojZTZCiPaZFEe0E8mPaG0y7R7Rp5sW0Npm2htAubFtDaZtobQHNg2htM20NoDmw7RbTNtFtA+bDtE4mZxFtEcWYWhbTK4icQVFmHAy3EAVyZ1EpRKRSQ3NNkKJSiWikhomzGoj2mRIeATyY9o9pkSHgE8mLaG0zYDADkw7RbTNgMAOTDsJcTOJoFcmBxE4mZolgqLMLiS4mdkMS4swuIGRgCuT//Z"
+                     alt="...">
+                <div class="icon_box">
+                    <div>
+                        <span class="material-icons-outlined">favorite_border</span>
+                        <span class="material-icons-outlined">mode_comment</span>
+                        {% if post.author.user_nick_name == user.user_nick_name %}
+                            <span class="material-icons-outlined" onclick="location.href='post/delete/{{ post.id }}'"
+                                  title="삭제하기">delete</span>
+
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.content }}</h4>
+                    <p class="card-text"><small class="text-muted">{{ post.created_at|timesince }}전</small></p>
+                </div>
+                <div class="col-md-12" style="background: white">
+                    <div class="card-body">
+                        <div style="float: left">
+                            <a href="/post/{{ post.id }}" class="btn btn-primary">상세보기</a>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h4 class="card-text">{{ post.content }}</h4>
-                                <p class="card-text" ><small
-                                        class="text-muted">{{ post.created_at|timesince }}전</small></p>
-                                <div style="float: right">
-                                    <a href="/post/{{ post.id }}" class="btn btn-primary">상세보기</a>
-                                </div>
-                                {% if post.author.user_nick_name == user.user_nick_name %}
-                                <div style="float: right">
-                                    <a href="/post/delete/{{ post.id }}" class="btn btn-danger">삭제하기</a>
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
-        {% endfor %}
-    </div>
+        </div>
+        <hr>
+    {% endfor %}
 </div>
 
 </body>
