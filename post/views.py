@@ -9,7 +9,8 @@ def home(request):
         user = request.user.is_authenticated
         if user:
             all_post = PostModel.objects.all().order_by('-created_at')
-            return render(request, 'post/post.html', {'posts': all_post})
+            all_comment = CommentModel.objects.all().order_by('-created_at')
+            return render(request, 'post/post.html', {'posts': all_post, 'comment': all_comment})
         else:
             return redirect('sign_in')
 
@@ -53,6 +54,32 @@ def detail_post(request, id):
     my_post = PostModel.objects.get(id=id)
     my_comment = CommentModel.objects.filter(post_id=id).order_by('-created_at')
     return render(request, 'post/post_detail.html', {'post': my_post, 'comment': my_comment})
+
+
+@login_required
+def write_comment(request, id):
+    if request.method == 'POST':
+        comment = request.POST.get("comment",'')
+        last_updated_at = request.POST.get('create_at')
+        current_post = PostModel.objects.get(id=id)
+        if comment == '':
+            return redirect('/')
+        post_comment = CommentModel()
+        post_comment.comment = comment
+        post_comment.post = current_post
+        post_comment.author = request.user
+        post_comment.last_updated_at = last_updated_at
+        print(last_updated_at)
+        print(comment)
+        post_comment.save()
+        return redirect('/')
+
+
+@login_required
+def delete_comment(request, id):
+    my_post = CommentModel.objects.get(id=id)
+    my_post.delete()
+    return redirect('/')
 
 
 @login_required
