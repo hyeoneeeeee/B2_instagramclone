@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+
+
+     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="stylesheet/post_detail.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
             rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <title>게시글 목록</title>
-    <style>
-        span {
+
+<style>
+    span {
         padding-right: 5px;
     }
     .navi_icons {
@@ -204,22 +207,204 @@
         margin: 10 0 0 10;
     }
 
-    </style>
-    <script>
-        window.onload = function() {
-            document.querySelector("#show").addEventListener("click", show);
-            document.querySelector("#close").addEventListener("click", close);
-        }
-        function show() {
-            document.querySelector(".background").className = "background show";
-        }
-        function close() {
-            document.querySelector(".background").className = "background";
-        }
-    </script>
+{% comment %} "my_profile.html 의 style(시작)" {% endcomment %}
+    span {
+        padding-right: 5px;
+    }
+
+    .navi_profile_box {
+        width: 30px;
+        height: 30px;
+        border-radius: 70%;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .profile_img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .navi_icons {
+        padding-right: 18px;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+
+    .container {
+        max-width: 999px;
+    }
+
+    .container-article:hover .overlay {
+        height: 100%;
+    }
+
+    a:link {
+        color: #000;
+        text-decoration: none;
+
+    }
+
+    a:visited {
+        color: #000;
+        text-decoration: none;
+
+    }
+
+    a:hover {
+        color: black;
+        width: 1100px;
+        margin: auto auto 1rem auto;
+        padding: 60px 20px 20px 20px;
+        /* box-shadow: 0px 0px 3px 0px white; */
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+        color: rgb(0 0 0);
+    }
+
+    .comment-widgets .comment-row:hover {
+        background: rgba(0, 0, 0, 0.02);
+        cursor: pointer
+    }
+
+    .comment-widgets .comment-row {
+        border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+        padding: 15px
+    }
+
+    .round img {
+        border-radius: 100%
+    }
+
+    .action-icons a {
+        padding-left: 7px;
+        vertical-align: middle;
+        color: #99abb4
+    }
+
+    .action-icons a:hover {
+        color: #1976d2
+    }
+
+    .image {
+    width: 320px;
+    height : 320px;
+    object-fit: contain;
+    background: black;
+    }
+
+    button {
+        background: #fff;
+        outline: none;
+        border: 1px solid rgb(218, 218, 218);
+        margin: 0px px;
+        width: 120px;
+        font-family: "Open sans", sans-serif;
+        font-weight: bolder;
+    }
+
+    .comment-text:hover {
+    visibility: hidden
+    }
+
+    .comment-text:hover {
+    visibility: visible
+    }
+
+    .label {
+    padding: 3px 10px;
+    line-height: 13px;
+    color: #ffffff;
+    font-weight: 400;
+    border-radius: 4px;
+    font-size: 75%
+    }
+
+    .round img {
+    border-radius: 100%
+    }
+
+    .label-info {
+    background-color: #1976d2
+    }
+
+    .label-success {
+    background-color: green
+    }
+
+    .label-danger {
+    background-color: #ef5350
+    }
+
+    .action-icons a {
+    padding-left: 7px;
+    vertical-align: middle;
+    color: #99abb4
+    }
+
+    .action-icons a:hover {
+    color: #1976d2
+    }
+
+    .mt-100 {
+    margin-top: 100px
+    }
+
+
+
+    @media screen and (max-width: 768px) {
+    .center-search{
+        margin-left: 0;
+    }
+    .item{
+        width: 40px;
+    }
+    .navbar-nav {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row!important;
+        flex-direction: row!important;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+    }
+
+    button {
+    background: #fff;
+    outline: none;
+    border: 1px solid rgb(218, 218, 218);
+    margin: 0px px;
+    width: 120px;
+    font-family: "Open sans", sans-serif;
+    font-weight: bolder;
+    }
+{% comment %} "my_profile.html 의 style(끝)" {% endcomment %}
+
+
+</style>
+
+
+<script>
+    window.onload = function() {
+        document.querySelector("#show").addEventListener("click", show);
+        document.querySelector("#close").addEventListener("click", close);
+    }
+    function show() {
+        document.querySelector(".background").className = "background show";
+    }
+    function close() {
+        document.querySelector(".background").className = "background";
+    }
+</script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" style="width: 100%;height: 50px;position: fixed;z-index: 9999">
+
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" style="width: 100%;height: 50px;position: fixed;z-index: 9999">
     <div class="container" style="min-width: 800px">
         <img class="go_home" style="height: 30px; object-fit: contain;cursor: pointer"
             src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
@@ -335,5 +520,6 @@
         <hr>
     {% endfor %}
 </div>
+
 </body>
 </html>
