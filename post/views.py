@@ -18,7 +18,7 @@ def write(request): # 게시글 작성 페이지
     if request.method == 'GET':
         user = request.user.is_authenticated
         if user:
-            return render(request, 'post/new_post.html')
+            return render(request, 'post/write.html')
         else:
             return redirect('/sign-in')
 
@@ -26,9 +26,11 @@ def write(request): # 게시글 작성 페이지
         user = request.user
         new_post = PostModel()
         new_post.author = user
-        new_post.content = request.POST.get('comment','')
+        new_post.content = request.POST.get('content','')
+        new_post.title = request.POST.get('title','')
+        new_post.image_link = request.POST.get('image_link', '')
         new_post.save()
-        return redirect('/post')
+        return redirect('/')
 
 
 def my_profile(request): #나의 프로필 페이지
