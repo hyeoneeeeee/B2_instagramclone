@@ -29,6 +29,7 @@ def write(request): # 게시글 작성 페이지
         new_post.content = request.POST.get('content','')
         new_post.title = request.POST.get('title','')
         new_post.image_link = request.POST.get('image_link', '')
+        new_post.images = request.FILES['images']
         new_post.save()
         return redirect('/')
 
@@ -37,7 +38,9 @@ def my_profile(request): #나의 프로필 페이지
     if request.method == 'GET':
         user = request.user.is_authenticated
         if user:
-            return render(request, 'post/my_profile.html')
+            my_id = request.user.id
+            my_post = PostModel.objects.filter(author_id=my_id).order_by('-created_at')
+            return render(request, 'post/my_profile.html', {'posts': my_post})
         else:
             return redirect('/sign-in')
 
