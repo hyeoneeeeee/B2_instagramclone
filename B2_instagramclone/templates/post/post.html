@@ -108,13 +108,13 @@
         width: 5px;
     }
     .comment_box::-webkit-scrollbar-thumb {
-        background-color: #000;
+        background-color: rgb(255, 255, 255);
         border-radius: 10px;
         background-clip: padding-box;
         border: 2px solid transparent;
     }
     .comment_box::-webkit-scrollbar-track {
-        background-color: #000;
+        background-color: rgb(58, 58, 58);
         border-radius: 10px;
         box-shadow: inset 0 0 5px white;
     }
@@ -173,11 +173,12 @@
         min-height: 62%;
         height: fit-content;
         overflow-y: scroll;
+        overflow-x: hidden;
         overflow-y: auto;
         /* background-color: coral; */
     }
     .comment_input{
-        height: 30px;
+        height: 40px;
         /* background-color: firebrick; */
     }
     .state_box{
@@ -216,6 +217,9 @@
         function close() {
             document.querySelector(".background").className = "background";
         }
+        function submit() {
+            $("#click").submit();
+        }
     </script>
 </head>
 <body>
@@ -234,6 +238,7 @@
     </div>
 </nav>
 <div class="background">
+    {% for post in posts %}
     <div class="window">
         <div class="popup">
             <div id="popupinner">
@@ -241,35 +246,40 @@
                     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR2BxT%2FbtrNwDw4Mfh%2FMclbtlQcdoTkFMLhrIhMKk%2Fimg.png">
                 </div>
                 <div class="detail_index">
-                    <div class="photo_area">
+                    <div class="photo_area" style="height: 720px">
                         <img src="https://t1.daumcdn.net/cfile/tistory/252B114858B05C7C21?original">
                     </div>
                     <div class="comment_area">
                         <div class="writer_box">
-                            닉네임
-                            <p>{{ post.author.user_nick_name }}</p>
+                            <p><b>{{ post.author.user_nick_name }}</b></p>
                             <hr style="margin: 0; height: 0.1px;">
                         </div>
                         <div class="comment_box">
-                            <div class="writer_comment" >
-                                글쓴이 : 안녕
+                            <div class="writer_comment">
+                                <p style="line-height: 0.5px;"><b>{{ post.author.user_nick_name }}: {{ post.content }}</b></p>
                                 <p><small>{{ post.created_at|timesince }}전</small></p>
                             </div>
                             <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;" >
                                 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkP38A%2FbtrNANly97k%2F6HZYXrz2efcUjFgXAyKls0%2Fimg.png">
                             </div>
                             {% for cm in comment %}
+                            {% if post.id == cm.post_id %}
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <h5 class="mt-0"> {{ cm.comment }} </h5>
-                                            <span> {{ cm.author }} </span>
-                                            <span> - {{ cm.created_at | timesince }} 전</span>
+                                    <div class="media-body">
+                                        <div style="float: right">
+                                            {% if cm.author == user %}
+                                                    <a href="/post/comment/delete/{{ cm.id }}">
+                                                        <span class="badge bg-danger">삭제</span>
+                                                    </a>
+                                                    {% endif %}
                                         </div>
+                                            <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{ cm.comment }}</p>
+                                            <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at | timesince }} 전</p>
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                             {% endfor %}
                         </div>
                         <hr>
@@ -279,15 +289,22 @@
                             <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPbFSd%2FbtrNGwXGaQB%2FGAyxkivKKe78jMemkunEr1%2Fimg.png">
                             <img align="right" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png">
                             <p style="margin-left: 10px; margin-top: 10px;"><b>좋아요123개</b>
-                            <p style="line-height: 0.5px; margin-left: 10px;"> - {{ cm.created_at | timesince }} 전</p>
+                                {% if post.id == cm.post_id %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> - {{ cm.created_at | timesince }} 전</p>
+                                {% else %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> 전</p>
+                                {% endif %}
                         </div>
                         <hr>
                         <div class="comment_input">
-                            <form>
-
-                                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FciuH8b%2FbtrNwGm7p8P%2FtPO3dkc4hKsUTle3YOA2b1%2Fimg.png" style="width: 35; height:35;">
-                                <input class="input_box" pype="text" style="border: none; outline: none;" placeholder="댓글 달기..">
-                                <a href="" type="submit" style="color:rgba(2, 128, 255, 0.945); position: absolute; margin:5px 5px 5px 30px ;">게시</a>
+                            <form method="post" action="/post/comment/{{ post.id }}" id="click">
+                                {% csrf_token %}
+                                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FciuH8b%2FbtrNwGm7p8P%2FtPO3dkc4hKsUTle3YOA2b1%2Fimg.png"
+                                     style="width: 35; height:35;">
+                                <input name="comment" class="input_box" pype="text" style="border: none; outline: none;"
+                                       placeholder="댓글 달기..">
+                                <a href="#" onclick="document.getElementById('click').submit(); return false"
+                                   style="color:rgba(2, 128, 255, 0.945); position: absolute; margin:5px 5px 5px 30px ;">게시</a>
                             </form>
                         </div>
                     </div>
@@ -295,6 +312,7 @@
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 {#게시물 표시 부분#}
 <div class="all_post">
@@ -323,13 +341,6 @@
                     <p class="card-text" style="float: right; margin: auto 10px auto auto"><small
                             class="text-muted">{{ post.created_at|timesince }}전</small></p>
                 </div>
-                {#                                <div class="col-md-12" style="background: white">#}
-                {#                                    <div class="card-body">#}
-                {#                                        <div style="float: left">#}
-                {#                                            <div href="detail_btn" id="show" class="detail_btn"><a><small>자세히..</small></a></div>#}
-                {#                                        </div>#}
-                {#                                    </div>#}
-                {#                                </div>#}
             </div>
         </div>
         <hr>
