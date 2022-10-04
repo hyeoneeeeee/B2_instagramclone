@@ -12,6 +12,7 @@ class PostModel(models.Model):  # 게시물 데이터베이스 모델
     title = models.CharField(max_length=256)    # 게시물 제목
     content = models.CharField(max_length=256)  # 게시물 내용
     image_link = models.TextField(default='...')
+    images = models.ImageField(blank=True, upload_to='images', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

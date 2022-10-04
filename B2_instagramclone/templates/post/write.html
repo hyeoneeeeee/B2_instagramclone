@@ -81,7 +81,7 @@
     <hr>
     임시 게시글등록
     <hr>
-    <form class="form-area" action="/write/" method="post">
+    <form class="form-area" enctype="multipart/form-data" action="/write/" method="post">
         {% csrf_token %}
         <div class='form-group'>
             <label for="title"></label>
@@ -94,6 +94,10 @@
         <div class='form-group'>
             <label for="image_link"></label>
             <input name="image_link" placeholder="이미지링크"/>
+        </div>
+        <div class='form-group'>
+            <label for="images"></label>
+            <input name="images" type="file" accept="image/*"/>
         </div>
         <button type="submit">등록</button>
     </form>
