@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import PostModel, CommentModel
-from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from rest_framework.views import APIView
+from rest_framework.response import Response
+import os
+from uuid import uuid4
+from B2_instagramclone.settings import MEDIA_ROOT
 
 
 def home(request):
@@ -16,23 +20,7 @@ def home(request):
 
 
 def write(request): # 게시글 작성 페이지
-    if request.method == 'GET':
-        user = request.user.is_authenticated
-        if user:
-            return render(request, 'post/write_post.html')
-        else:
-            return redirect('/sign-in')
-
-    elif request.method == 'POST':
-        user = request.user
-        new_post = PostModel()
-        new_post.author = user
-        new_post.content = request.POST.get('content','')
-        new_post.title = request.POST.get('title','')
-        new_post.image_link = request.POST.get('image_link', '')
-        new_post.images = request.FILES['images']
-        new_post.save()
-        return redirect('/')
+    return render(request, 'post/write.html')
 
 
 def my_profile(request): #나의 프로필 페이지
@@ -72,14 +60,14 @@ def write_comment(request, id):
         print(last_updated_at)
         print(comment)
         post_comment.save()
-        return redirect('/')
+        return redirect(f'/post/{post_comment.post_id}')
 
 
 @login_required
 def delete_comment(request, id):
     my_post = CommentModel.objects.get(id=id)
     my_post.delete()
-    return redirect('/')
+    return redirect(f'/post/{my_post.post_id}')
 
 
 @login_required
@@ -108,3 +96,24 @@ def delete_post(request, id):
     my_post = PostModel.objects.get(id=id)
     my_post.delete()
     return redirect('/')
+
+class UploadPost(APIView):  # 게시글 업로드
+    def post(self, request):
+        file = request.FILES['file']
+
+        uuid_name = uuid4().hex
+        save_path = os.path.join(MEDIA_ROOT, uuid_name)
+
+        with open(save_path, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+
+        image = uuid_name
+        title = request.data.get('title')
+        content = request.data.get('content')
+        created_at = request.data.get('created_at')
+        updated_at = request.data.get('updated_at')
+
+        PostModel.objects.create(author=request.user, title=title, content=content, image=image, created_at=created_at, updated_at=updated_at)
+
+        return Response(status=200)
