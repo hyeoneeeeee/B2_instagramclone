@@ -19,7 +19,7 @@ def write(request): # 게시글 작성 페이지
     if request.method == 'GET':
         user = request.user.is_authenticated
         if user:
-            return render(request, 'post/write.html')
+            return render(request, 'post/write_post.html')
         else:
             return redirect('/sign-in')
 
@@ -80,6 +80,27 @@ def delete_comment(request, id):
     my_post = CommentModel.objects.get(id=id)
     my_post.delete()
     return redirect('/')
+
+
+@login_required
+def edit_post(request, id):
+    if request.method == 'GET':
+        user = request.user.is_authenticated
+        if user:
+            current_post = PostModel.objects.get(id=id)
+            return render(request, 'post/edit_post.html', {'post': current_post})
+        else:
+            return redirect('/sign-in')
+
+    elif request.method == 'POST':
+        edited_post = PostModel.objects.get(id=id)
+
+        edited_post.content = request.POST.get('content','')
+        edited_post.title = request.POST.get('title','')
+        edited_post.images = request.FILES['images']
+        edited_post.save()
+
+        return redirect('/')
 
 
 @login_required
