@@ -1,390 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="stylesheet/post_detail.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-            rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <title>게시글 목록</title>
 
-<style>
-    span {
-        padding-right: 5px;
-    }
-    .navi_icons {
-        padding-right: 18px;
-        font-size: 28px;
-        cursor: pointer;
-    }
-    .all_post {
-        border: 1px solid lightgray;
-        border-radius: 3px;
-        background-color: white;
-        color: black;
-        width: 750px;
-        margin: auto auto 1rem auto;
-        padding: 60px 20px 20px 20px;
-        /* box-shadow: 0px 0px 3px 0px white; */
-    }
-    .postbox {
-        /* border: 1px solid blue; */
-        background-color: white;
-        width: 100%;
-        text-align: left;
-    }
-    .img_box {
-        width: 700px;
-        height : 400px;
-        object-fit: contain;
-        background: #fafafa;
-    }
-    .icon_box {
-        padding: 5px 5px 0px 5px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .content_text {
-        white-space:nowrap;
-        overflow:hidden;
-        text-overflow:ellipsis;
-    }
-
-    body {
-        background-color: #fafafa;
-    }
-
-    .detail_btn{
-        /* background-color: aqua; */
-        width: 50px;
-        height: 22px;
-        color: rgb(0, 0, 0);
-    }
-    .detail_btn:hover {
-        color: rgb(105, 105, 105);
-        cursor: pointer;
-    }
-    .background {
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-        z-index: -1;
-        opacity: 0;
-    }
-    .show {
-        opacity: 1;
-        z-index: 1000;
-        transition: all 0.5s;
-    }
-    .window {
-        position: relative;
-        width: 100%;
-        height: 100%;
-
-    }
-    .popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fafafa;
-        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-        border-radius: 15px;
-        width: 85%;
-        height: 75%;
-        /* overflow-y: scroll; */
-        /* overflow-x: hidden; */
-        transform: translate(-50%, -40%);
-    }
-    .comment_box::-webkit-scrollbar {
-        width: 5px;
-    }
-    .comment_box::-webkit-scrollbar-thumb {
-        /* background-color: rgb(26, 255, 0); */
-        border-radius: 10px;
-        background-clip: padding-box;
-        overflow-y: scroll;
-        overflow-y: auto;
-        border: 2px solid transparent;
-    }
-    .comment_box::-webkit-scrollbar-track {
-        background-color: rgb(58, 58, 58);
-        border-radius: 10px;
-        box-shadow: inset 0 0 5px white;
-    }
-    .show .popup {
-        transform: translate(-50%, -50%);
-        transition: all 0.5s;
-    }
-    #close > img {
-        width: 35px;
-        height: 35px;
-        cursor: pointer;
-    }
-    #close {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        /* background-color: rgb(222, 8, 8); */
-    }
-    #popupinner {
-        position: relative;
-        /* background-color: blueviolet; */
-        height: 100%;
-        width: 100%;
-    }
-    .detail_index {
-        /* background-color: aquamarine; */
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-    }
-    .photo_area {
-        width: 50%;
-        height: 100%;
-        /* background-color: #000; */
-        display: flex;
-        justify-content:center;
-        align-items: center;
-        border-right: 1px solid rgb(58, 58, 58, 0.2);
-
-    }
-    .photo_area > img{
-        width: 100%;
-        object-fit: contain;
-    }
-    .comment_area {
-        /* background-color: blue; */
-        width: 50%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        margin-left: 10px;
-    }
-    .writer_box{
-        height: 70px;
-        /* background-color: #352c2c; */
-        margin: 10 0 0 0;
-    }
-    .comment_box{
-        padding-top: 10px;
-        min-height: 62%;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        overflow-y:hidden;
-        overflow-y: auto;
-        /* background-color: coral; */
-    }
-    .comment_input{
-        height: 40px;
-        bottom: 10px;
-        position: fixed;
-        width: 50%;
-        background-color: firebrick;
-    }
-    .state_box{
-        /* background-color: darkslategrey; */
-        height: 100px;
-    }
-    .state_box > img{
-        width: 30px;
-        height: 30px;
-        margin: 5px 5px 0px 5px;
-    }
-    .input_box{
-        height: 100%;
-        width: 85%;
-    }
-    a {
-        text-decoration: none;
-    }
-    .comment > a:hover{
-        color: rgb(2, 48, 255);
-    }
-    .writer_comment{
-        /* background-color: rgb(255, 0, 234); */
-        margin: 10 0 0 10;
-    }
-
-    span {
-        padding-right: 5px;
-    }
-
-    .navi_profile_box {
-        width: 30px;
-        height: 30px;
-        border-radius: 70%;
-        overflow: hidden;
-        cursor: pointer;
-    }
-
-    .profile_img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .navi_icons {
-        padding-right: 18px;
-        font-size: 28px;
-        cursor: pointer;
-    }
-
-
-    .container {
-        max-width: 999px;
-    }
-
-    .container-article:hover .overlay {
-        height: 100%;
-    }
-
-    .navbar-light .navbar-nav .nav-link {
-        color: rgb(0 0 0);
-    }
-
-    .comment-widgets .comment-row:hover {
-        background: rgba(0, 0, 0, 0.02);
-        cursor: pointer
-    }
-
-    .comment-widgets .comment-row {
-        border-bottom: 1px solid rgba(120, 130, 140, 0.13);
-        padding: 15px
-    }
-
-    .round img {
-        border-radius: 100%
-    }
-
-    .action-icons a {
-        padding-left: 7px;
-        vertical-align: middle;
-        color: #99abb4
-    }
-
-    .action-icons a:hover {
-        color: #1976d2
-    }
-
-    .image {
-        width: 320px;
-        height : 320px;
-        object-fit: contain;
-        background: black;
-    }
-
-    button {
-        background: #fff;
-        outline: none;
-        border: 1px solid rgb(218, 218, 218);
-        margin: 0px px;
-        width: 120px;
-        font-family: "Open sans", sans-serif;
-        font-weight: bolder;
-    }
-
-    .comment-text:hover {
-        visibility: hidden
-    }
-
-    .comment-text:hover {
-        visibility: visible
-    }
-
-    .label {
-        padding: 3px 10px;
-        line-height: 13px;
-        color: #ffffff;
-        font-weight: 400;
-        border-radius: 4px;
-        font-size: 75%
-    }
-
-    .round img {
-        border-radius: 100%
-    }
-
-    .label-info {
-        background-color: #1976d2
-    }
-
-    .label-success {
-        background-color: green
-    }
-
-    .label-danger {
-        background-color: #ef5350
-    }
-
-    .action-icons a {
-        padding-left: 7px;
-    vertical-align: middle;
-    color: #99abb4
-}
-
-    .action-icons a:hover {
-        color: #1976d2
-    }
-
-    .mt-100 {
-        margin-top: 100px
-    }
-
-
-
-    @media screen and (max-width: 768px) {
-        .center-search{
-            margin-left: 0;
+    <style>
+        span {
+            padding-right: 5px;
         }
-        .item{
-            width: 40px;
+
+        .navi_icons {
+            padding-right: 18px;
+            font-size: 28px;
+            cursor: pointer;
         }
-        .navbar-nav {
-            display: -ms-flexbox;
+
+        .all_post {
+            border: 1px solid lightgray;
+            border-radius: 3px;
+            /* background-color: rgb(0, 33, 143); */
+            color: black;
+            width: 750px;
+            margin: auto auto 1rem auto;
+            padding: 60px 20px 20px 20px;
+            left: 50%;
+            /* box-shadow: 0px 0px 3px 0px white; */
+        }
+
+        .postbox {
+            /* border: 1px solid blue; */
+            /* background-color: rgb(0, 158, 26); */
+            width: 100%;
+            text-align: left;
+        }
+
+        .img_box {
+            width: 700px;
+            height: 400px;
+            object-fit: contain;
+            background: #fafafa;
+        }
+
+        .icon_box {
+            padding: 5px 5px 0px 5px;
             display: flex;
-            -ms-flex-direction: row;
-            flex-direction: row;
-            padding-left: 0;
-            margin-bottom: 0;
-            list-style: none;
+            justify-content: space-between;
         }
-    }
 
-    button {
-        background: #fff;
-        outline: none;
-        border: 1px solid rgb(218, 218, 218);
-        margin: 0px px;
-        width: 120px;
-        font-family: "Open sans", sans-serif;
-        font-weight: bolder;
-    }
+        .content_text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        body {
+            background-color: #fafafa;
+        }
+
+        .detail_btn {
+            /* background-color: aqua; */
+            width: 50px;
+            height: 22px;
+            color: rgb(0, 0, 0);
+        }
+
+        .detail_btn:hover {
+            color: rgb(105, 105, 105);
+            cursor: pointer;
+        }
+
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .show {
+            opacity: 1;
+            z-index: 1000;
+            transition: all 0.5s;
+        }
+
+        .window {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fafafa;
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            width: 85%;
+            height: 75%;
+            /* overflow-y: scroll; */
+            /* overflow-x: hidden; */
+            transform: translate(-50%, -40%);
+        }
+
+        .comment_box::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .comment_box::-webkit-scrollbar-thumb {
+            /* background-color: rgb(26, 255, 0); */
+            border-radius: 10px;
+            background-clip: padding-box;
+            overflow-y: scroll;
+            overflow-y: auto;
+            border: 2px solid transparent;
+        }
+
+        .comment_box::-webkit-scrollbar-track {
+            background-color: rgb(58, 58, 58);
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px white;
+        }
+
+        .show .popup {
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+        }
+
+        #close>img {
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+        }
+
+        #close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            /* background-color: rgb(222, 8, 8); */
+        }
+
+        #popupinner {
+            position: relative;
+            /* background-color: blueviolet; */
+            height: 100%;
+            width: 100%;
+        }
+
+        .detail_index {
+            /* background-color: aquamarine; */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .photo_area {
+            width: 50%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid rgb(58, 58, 58, 0.2);
+
+        }
+
+        .photo_area>img {
+            height: 100%;
+            /* width: 100%; */
+            object-fit: scale-down;
+            /* background-color: #ef5350; */
+        }
+
+        .comment_area {
+            /* background-color: blue; */
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+        }
+
+        .writer_box {
+            height: 70px;
+            /* background-color: #352c2c; */
+            margin: 10 0 0 0;
+        }
+
+        .comment_box {
+            padding-top: 10px;
+            min-height: 62%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            overflow-y: auto;
+            /* background-color: coral; */
+        }
+
+        .comment_input {
+            height: 40px;
+            bottom: 10px;
+            position: fixed;
+            width: 50%;
+            /* background-color: firebrick; */
+        }
+
+        .state_box {
+            /* background-color: darkslategrey; */
+            height: 100px;
+        }
+
+        .state_box>img {
+            width: 30px;
+            height: 30px;
+            margin: 5px 5px 0px 5px;
+        }
+
+        .input_box {
+            height: 100%;
+            width: 85%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .comment>a:hover {
+            color: rgb(2, 48, 255);
+        }
+
+        .writer_comment {
+            /* background-color: rgb(255, 0, 234); */
+            margin: 10 0 0 10;
+        }
+
+        span {
+            padding-right: 5px;
+        }
+
+        .navi_profile_box {
+            width: 30px;
+            height: 30px;
+            border-radius: 70%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .profile_img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .navi_icons {
+            padding-right: 18px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+
+        .container {
+            max-width: 999px;
+        }
+
+        .container-article:hover .overlay {
+            height: 100%;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: rgb(0 0 0);
+        }
+
+        .comment-widgets .comment-row:hover {
+            background: rgba(0, 0, 0, 0.02);
+            cursor: pointer
+        }
+
+        .comment-widgets .comment-row {
+            border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+            padding: 15px
+        }
+
+        .round img {
+            border-radius: 100%
+        }
+
+        .action-icons a {
+            padding-left: 7px;
+            vertical-align: middle;
+            color: #99abb4
+        }
+
+        .action-icons a:hover {
+            color: #1976d2
+        }
+
+        .image {
+            width: 320px;
+            height: 320px;
+            object-fit: contain;
+            background: black;
+        }
+
+        button {
+            background: #fff;
+            outline: none;
+            border: 1px solid rgb(218, 218, 218);
+            margin: 0px px;
+            width: 120px;
+            font-family: "Open sans", sans-serif;
+            font-weight: bolder;
+        }
+
+        .comment-text:hover {
+            visibility: hidden
+        }
+
+        .comment-text:hover {
+            visibility: visible
+        }
+
+        .label {
+            padding: 3px 10px;
+            line-height: 13px;
+            color: #ffffff;
+            font-weight: 400;
+            border-radius: 4px;
+            font-size: 75%
+        }
+
+        .round img {
+            border-radius: 100%
+        }
+
+        .label-info {
+            background-color: #1976d2
+        }
+
+        .label-success {
+            background-color: green
+        }
+
+        .label-danger {
+            background-color: #ef5350
+        }
+
+        .action-icons a {
+            padding-left: 7px;
+            vertical-align: middle;
+            color: #99abb4
+        }
+
+        .action-icons a:hover {
+            color: #1976d2
+        }
+
+        .mt-100 {
+            margin-top: 100px
+        }
+
+
+
+        @media screen and (max-width: 768px) {
+            .center-search {
+                margin-left: 0;
+            }
+
+            .item {
+                width: 40px;
+            }
+
+            .navbar-nav {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-direction: row;
+                flex-direction: row;
+                padding-left: 0;
+                margin-bottom: 0;
+                list-style: none;
+            }
+        }
+
+        button {
+            background: #fff;
+            outline: none;
+            border: 1px solid rgb(218, 218, 218);
+            margin: 0px px;
+            width: 120px;
+            font-family: "Open sans", sans-serif;
+            font-weight: bolder;
+        }
+        .background2 {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .show2 {
+            opacity: 1;
+            z-index: 1000;
+            transition: all 0.5s;
+        }
+
+        .show2 .popup {
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+        }
+
+        #close2>img {
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+        }
+
+        #close2 {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            /* background-color: rgb(222, 8, 8); */
+        }
+        .background3 {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .show3 {
+            opacity: 1;
+            z-index: 1000;
+            transition: all 0.5s;
+        }
+
+        .show3 .popup {
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+        }
+
+        #close3>img {
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+        }
+
+        #close3 {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            /* background-color: rgb(222, 8, 8); */
+        }
+        .background4 {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .show4 {
+            opacity: 1;
+            z-index: 1000;
+            transition: all 0.5s;
+        }
+
+        .show4 .popup {
+            transform: translate(-50%, -50%);
+            transition: all 0.5s;
+        }
+
+        #close4>img {
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+        }
+
+        #close4 {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            /* background-color: rgb(222, 8, 8); */
+        }
     </style>
 
 
     <script>
-        window.onload = function() {
-            document.querySelector("#show").addEventListener("click", show);
-            document.querySelector("#close").addEventListener("click", close);
-        }
         function show() {
-
             document.querySelector(".background").className = "background show";
         }
         function close() {
             document.querySelector(".background").className = "background";
         }
+
+
+        function show2() {
+            document.querySelector(".background2").className = "background2 show2";
+        }
+        function close2() {
+            document.querySelector(".background2").className = "background2";
+        }
+
+
+        function show3() {
+            document.querySelector(".background3").className = "background3 show3";
+        }
+        function close3() {
+            document.querySelector(".background3").className = "background3";
+        }
+
+
+        function show4() {
+            document.querySelector(".background4").className = "background4 show4";
+        }
+        function close4() {
+            document.querySelector(".background4").className = "background4";
+        }
+
+        window.onload = function () {
+
+            document.querySelector("#show").addEventListener("click", show);
+            document.querySelector("#close").addEventListener("click", close);
+
+            document.querySelector("#show2").addEventListener("click", show2);
+            document.querySelector("#close2").addEventListener("click", close2);
+
+            document.querySelector("#show3").addEventListener("click", show3);
+            document.querySelector("#close3").addEventListener("click", close3);
+
+            document.querySelector("#show4").addEventListener("click", show4);
+            document.querySelector("#close4").addEventListener("click", close4);
+        }
+
+
         function submit() {
             $("#click").submit();
         }
@@ -393,143 +565,461 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom"
+        style="width: 100%;height: 50px;">
+        <div class="container" style="min-width: 800px">
+            <img class="go_home" style="height: 30px; object-fit: contain;cursor: pointer"
+                src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
+            <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
+            <div style="display: flex; flex-direction: row; align-items: center; ">
+                <span onclick="location.href='/'" class="material-icons navi_icons go_home" title="홈페이지">home</span>
+                <span onclick="location.href='/write'" id="add_feed" class="material-icons-outlined navi_icons"
+                    title="글쓰기">add_box</span>
+                <span onclick="location.href='/myprofile'" class="material-icons navi_icons person"
+                    title="내 프로필">person</span>
+                <span onclick="location.href='/logout'" class="material-icons navi_icons logout"
+                    title="로그아웃">logout</span>
+                <span>{{ user.user_nick_name }}님 환영합니다!</span>
+                <ul class="dropdown-menu" style="left: -130px" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">프로필</a></li>
+                    <li><a class="dropdown-item" href="#">저장됨</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="...">로그아웃</a></li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom"
-    style="width: 100%;height: 50px;z-index: 9999">
-   <div class="container" style="min-width: 800px">
-       <img class="go_home" style="height: 30px; object-fit: contain;cursor: pointer"
-            src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
-       <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
-       <div style="display: flex; flex-direction: row; align-items: center; ">
-           <span onclick="location.href='/'" class="material-icons navi_icons go_home" title="홈페이지">home</span>
-           <span onclick="location.href='/write'" id="add_feed" class="material-icons-outlined navi_icons" title="글쓰기">add_box</span>
-           <span onclick="location.href='/myprofile'" class="material-icons navi_icons person" title="내 프로필">person</span>
-           <span onclick="location.href='/logout'" class="material-icons navi_icons logout" title="로그아웃">logout</span>
-             <span>{{ user.user_nick_name }}님 환영합니다!</span>
-               <ul class="dropdown-menu" style="left: -130px" aria-labelledby="dropdownMenuButton1">
-                   <li><a class="dropdown-item" href="#">프로필</a></li>
-                   <li><a class="dropdown-item" href="#">저장됨</a></li>
-                   <li>
-                       <hr class="dropdown-divider">
-                   </li>
-                   <li><a class="dropdown-item" href="...">로그아웃</a></li>
-               </ul>
-           </div>
-       </div>
-   </div>
-</nav>
-<div class="background">
-    {% for post in posts %}
-    <div class="window">
-        <div class="popup">
-            <div id="popupinner">
-                <div id="close">
-                    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR2BxT%2FbtrNwDw4Mfh%2FMclbtlQcdoTkFMLhrIhMKk%2Fimg.png">
-                </div>
-                <div class="detail_index">
-                    <div class="photo_area">
-                        <img src="{{ post.images.url }}">
+    <!-- 모달 -->
+    <div class="background">
+        <div class="window">
+            <div class="popup">
+                <div id="popupinner">
+                    <div id="close">
+                        <img
+                            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR2BxT%2FbtrNwDw4Mfh%2FMclbtlQcdoTkFMLhrIhMKk%2Fimg.png">
                     </div>
-                    <div class="comment_area">
-                        <div class="writer_box">
-                            <p><b>{{ post.author.user_nick_name }}</b></p>
-                            <hr style="margin: 0; height: 0.1px;">
+                    <div class="detail_index">
+                        <div class="photo_area">
+                            <img
+                                src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FomLPv%2FbtrNVgzXzG2%2FCPBDddK4KO9HAKZGj7qPYK%2Fimg.jpg">
                         </div>
-                        <div class="comment_box">
-                            <div class="writer_comment">
-                                <p style="line-height: 0.5px;"><b>{{ post.author.user_nick_name }}: {{ post.content }}</b></p>
-                                <p style="line-height: 10px; margin-left: 30px;"><small>{{ post.created_at|timesince }}전</small></p>
+                        <div class="comment_area">
+                            <div class="writer_box">
+                                <p><b>hyeon_eee</b></p>
+                                <hr style="margin: 0; height: 0.1px;">
                             </div>
-                            <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;">
-                                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkP38A%2FbtrNANly97k%2F6HZYXrz2efcUjFgXAyKls0%2Fimg.png">
-                            </div>
-                            {% for cm in comment %}
-                            {% if post.id == cm.post_id %}
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="media-body">
-                                        <div style="float: right">
-                                            {% if cm.author == user %}
-                                                <a style="cursor:pointer" class="material-icons-outlined"
-                                                    href="/post/comment/delete/{{ cm.id }}"
-                                                    title="삭제하기">delete</a>
-                                            {% endif %}
+                            <div class="comment_box">
+                                <div class="writer_comment">
+                                    <p style="line-height: 0.5px;"><b>hyeon_eee: 인싸 카페</b></p>
+                                    <p style="line-height: 10px; margin-left: 30px;"><small>12시간 전</small></p>
+                                </div>
+                                <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;">
+                                    <img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkP38A%2FbtrNANly97k%2F6HZYXrz2efcUjFgXAyKls0%2Fimg.png">
+                                </div>
+                                {% for cm in comment %}
+                                {% if post.id == cm.post_id %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="media-body">
+                                            <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{cm.comment }}</p>
+                                            <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at |timesince }} 전</p>
                                         </div>
-                                            <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{ cm.comment }}</p>
-                                            <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at | timesince }} 전</p>
                                     </div>
                                 </div>
-                            </div>
-                            {% endif %}
-                            {% endfor %}
-                        </div>
-                        <hr>
-                        <div class="state_box">
-                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLzrSa%2FbtrNFT6tnSM%2FzZShCwEYyfE9GvS0fDZqT0%2Fimg.png">
-                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGjl7f%2FbtrNAxJSI6x%2FStMj7mGRkrdFLpiEd0TRDk%2Fimg.png">
-                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPbFSd%2FbtrNGwXGaQB%2FGAyxkivKKe78jMemkunEr1%2Fimg.png">
-                            <img align="right" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png">
-                            <p style="margin-left: 10px; margin-top: 10px;"><b>좋아요123개</b>
-                                {% if post.id == cm.post_id %}
-                                <p style="line-height: 0.5px; margin-left: 10px;"> {{ cm.created_at | timesince }} 전</p>
-                                {% else %}
-                                <p style="line-height: 0.5px; margin-left: 10px;"> {{cm.created_at}}전</p>
                                 {% endif %}
-                        </div>
-                        <hr>
-                        <div class="comment_input">
-                            <form method="post" action="/post/comment/{{ post.id }}" id="click">
-                                {% csrf_token %}
-                                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FciuH8b%2FbtrNwGm7p8P%2FtPO3dkc4hKsUTle3YOA2b1%2Fimg.png"
-                                     style="width: 35; height:35;">
-                                <input name="comment" class="input_box" pype="text" style="border: none; outline: none;"
-                                       placeholder="댓글 달기..">
-                                <a href="#" onclick="document.getElementById('click').submit(); return false"
-                                   style="color:rgba(2, 128, 255, 0.945); position: absolute; margin:5px 5px 5px 30px ;">게시</a>
-                            </form>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="state_box">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLzrSa%2FbtrNFT6tnSM%2FzZShCwEYyfE9GvS0fDZqT0%2Fimg.png">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGjl7f%2FbtrNAxJSI6x%2FStMj7mGRkrdFLpiEd0TRDk%2Fimg.png">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPbFSd%2FbtrNGwXGaQB%2FGAyxkivKKe78jMemkunEr1%2Fimg.png">
+                                <img align="right"
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png">
+                                <p style="margin-left: 10px; margin-top: 10px;"><b>좋아요109개</b>
+                                    {% if post.id == cm.post_id %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> - </p>
+                                {% else %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> - </p>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <div class="comment_input">
+                                <form method="post" action="/post/comment/{{ post.id }}" id="click">
+                                    {% csrf_token %}
+                                    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FciuH8b%2FbtrNwGm7p8P%2FtPO3dkc4hKsUTle3YOA2b1%2Fimg.png"
+                                        style="width: 35; height:35;">
+                                    <input name="comment" class="input_box" pype="text"
+                                        style="border: none; outline: none;" placeholder="댓글 달기..">
+                                    <a href="#" onclick="document.getElementById('click').submit(); return false"
+                                        style="color:rgba(2, 128, 255, 0.945); position: absolute; margin:5px 5px 5px 30px ;">게시</a>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {% endfor %}
-</div>
-{#게시물 표시 부분#}
-<div class="all_post">
-    <hr>
-    {% for post in posts %}
-        <div class="row">
-            <div class="postbox">
-                <div style="color: black"><h3>{{ post.author.user_nick_name }}</h3></div>
-                <img class="img_box" id="show"
-                     src="{{ post.images.url }}"
-                     alt="...">
-                <div class="icon_box">
-                    <div>
-                        <span class="material-icons-outlined">favorite_border</span>
-                        <span class="material-icons-outlined">mode_comment</span>
-                        {% if post.author.user_nick_name == user.user_nick_name %}
-                            <span style="cursor:pointer" class="material-icons-outlined"
-                                  onclick="location.href='post/edit/{{ post.id }}'"
-                                  title="수정하기">edit</span>
-                            <span style="cursor:pointer" class="material-icons-outlined"
-                                  onclick="location.href='post/delete/{{ post.id }}'"
-                                  title="삭제하기">delete</span>
-                        {% endif %}
+    <div class="background2">
+        <div class="window">
+            <div class="popup">
+                <div id="popupinner">
+                    <div id="close2">
+                        <img
+                            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR2BxT%2FbtrNwDw4Mfh%2FMclbtlQcdoTkFMLhrIhMKk%2Fimg.png">
                     </div>
-                </div>
-                <div>
-                    <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.title }}</h4>
-                    <h5 class="content_text"> {{ post.content }} </h5>
-                    <p class="card-text" style="float: right; margin: auto 10px auto auto"><small
-                            class="text-muted">{{ post.created_at|timesince }}전</small></p>
+                    <div class="detail_index">
+                        <div class="photo_area">
+                            <img
+                                src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/444cdbb7-4e01-40b6-8f00-02b5557cd5f9/KakaoTalk_20220805_154703469.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221005%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221005T125753Z&X-Amz-Expires=86400&X-Amz-Signature=8b7c5cc8d1eb7b4161f80961644a66bff1caa204a11e4222c3cc27b1896db760&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22KakaoTalk_20220805_154703469.jpg%22&x-id=GetObject">
+                        </div>
+                        <div class="comment_area">
+                            <div class="writer_box">
+                                <p><b>닉네임</b></p>
+                                <hr style="margin: 0; height: 0.1px;">
+                            </div>
+                            <div class="comment_box">
+                                <div class="writer_comment">
+                                    <p style="line-height: 0.5px;"><b>닉네임: 제목</b></p>
+                                    <p style="line-height: 10px; margin-left: 30px;"><small>{{ post.created_at|timesince}}전</small></p>
+                                </div>
+                                <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;">
+                                    <img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkP38A%2FbtrNANly97k%2F6HZYXrz2efcUjFgXAyKls0%2Fimg.png">
+                                </div>
+                                {% for cm in comment %}
+                                {% if post.id == cm.post_id %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="media-body">
+                                            <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{cm.comment }}</p>
+                                            <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at |timesince }} 전</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="state_box">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLzrSa%2FbtrNFT6tnSM%2FzZShCwEYyfE9GvS0fDZqT0%2Fimg.png">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGjl7f%2FbtrNAxJSI6x%2FStMj7mGRkrdFLpiEd0TRDk%2Fimg.png">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPbFSd%2FbtrNGwXGaQB%2FGAyxkivKKe78jMemkunEr1%2Fimg.png">
+                                <img align="right"
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png">
+                                <p style="margin-left: 10px; margin-top: 10px;"><b>좋아요123개</b>
+                                    {% if post.id == cm.post_id %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> {{ cm.created_at | timesince }} 전</p>
+                                {% else %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> {{cm.created_at}}전</p>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <div class="comment_input">
+                                <form method="post" action="/post/comment/{{ post.id }}" id="click">
+                                    {% csrf_token %}
+                                    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FciuH8b%2FbtrNwGm7p8P%2FtPO3dkc4hKsUTle3YOA2b1%2Fimg.png"
+                                        style="width: 35; height:35;">
+                                    <input name="comment" class="input_box" pype="text"
+                                        style="border: none; outline: none;" placeholder="댓글 달기..">
+                                    <a href="#" onclick="document.getElementById('click').submit(); return false"
+                                        style="color:rgba(2, 128, 255, 0.945); position: absolute; margin:5px 5px 5px 30px ;">게시</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <hr>
-    {% endfor %}
-</div>
+    </div>
+    <div class="background3">
+        <div class="window">
+            <div class="popup">
+                <div id="popupinner">
+                    <div id="close3">
+                        <img
+                            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR2BxT%2FbtrNwDw4Mfh%2FMclbtlQcdoTkFMLhrIhMKk%2Fimg.png">
+                    </div>
+                    <div class="detail_index">
+                        <div class="photo_area">
+                            <img
+                                src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPbFSd%2FbtrNGwXGaQB%2FGAyxkivKKe78jMemkunEr1%2Fimg.png">
+                        </div>
+                        <div class="comment_area">
+                            <div class="writer_box">
+                                <p><b>hyeon_eee</b></p>
+                                <hr style="margin: 0; height: 0.1px;">
+                            </div>
+                            <div class="comment_box">
+                                <div class="writer_comment">
+                                    <p style="line-height: 0.5px;"><b>hyeon_eee: 인싸 카페</b></p>
+                                    <p style="line-height: 10px; margin-left: 30px;"><small>12시간 전</small></p>
+                                </div>
+                                <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;">
+                                    <img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkP38A%2FbtrNANly97k%2F6HZYXrz2efcUjFgXAyKls0%2Fimg.png">
+                                </div>
+                                {% for cm in comment %}
+                                {% if post.id == cm.post_id %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="media-body">
+                                            <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{cm.comment }}</p>
+                                            <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at |timesince }} 전</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="state_box">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLzrSa%2FbtrNFT6tnSM%2FzZShCwEYyfE9GvS0fDZqT0%2Fimg.png">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGjl7f%2FbtrNAxJSI6x%2FStMj7mGRkrdFLpiEd0TRDk%2Fimg.png">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPbFSd%2FbtrNGwXGaQB%2FGAyxkivKKe78jMemkunEr1%2Fimg.png">
+                                <img align="right"
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png">
+                                <p style="margin-left: 10px; margin-top: 10px;"><b>좋아요123개</b>
+                                    {% if post.id == cm.post_id %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> {{ cm.created_at | timesince }} 전</p>
+                                {% else %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> -</p>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <div class="comment_input">
+                                <form method="post" action="/post/comment/{{ post.id }}" id="click">
+                                    {% csrf_token %}
+                                    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FciuH8b%2FbtrNwGm7p8P%2FtPO3dkc4hKsUTle3YOA2b1%2Fimg.png"
+                                        style="width: 35; height:35;">
+                                    <input name="comment" class="input_box" pype="text"
+                                        style="border: none; outline: none;" placeholder="댓글 달기..">
+                                    <a href="#" onclick="document.getElementById('click').submit(); return false"
+                                        style="color:rgba(2, 128, 255, 0.945); position: absolute; margin:5px 5px 5px 30px ;">게시</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="background4">
+        <div class="window">
+            <div class="popup">
+                <div id="popupinner">
+                    <div id="close4">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR2BxT%2FbtrNwDw4Mfh%2FMclbtlQcdoTkFMLhrIhMKk%2Fimg.png">
+                    </div>
+                    <div class="detail_index">
+                        <div class="photo_area">
+                            <img
+                                src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png">
+                        </div>
+                        <div class="comment_area">
+                            <div class="writer_box">
+                                <p><b>닉네임</b></p>
+                                <hr style="margin: 0; height: 0.1px;">
+                            </div>
+                            <div class="comment_box">
+                                <div class="writer_comment">
+                                    <p style="line-height: 0.5px;"><b>닉네임: 제목</b></p>
+                                    <p style="line-height: 10px; margin-left: 30px;"><small>{{ post.created_at|timesince
+                                            }}전</small></p>
+                                </div>
+                                <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;">
+                                    <img
+                                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkP38A%2FbtrNANly97k%2F6HZYXrz2efcUjFgXAyKls0%2Fimg.png">
+                                </div>
+                                {% for cm in comment %}
+                                {% if post.id == cm.post_id %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="media-body">
+                                            <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{
+                                                cm.comment }}</p>
+                                            <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at |
+                                                timesince }} 전</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <hr>
+                            <div class="state_box">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLzrSa%2FbtrNFT6tnSM%2FzZShCwEYyfE9GvS0fDZqT0%2Fimg.png">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGjl7f%2FbtrNAxJSI6x%2FStMj7mGRkrdFLpiEd0TRDk%2Fimg.png">
+                                <img
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPbFSd%2FbtrNGwXGaQB%2FGAyxkivKKe78jMemkunEr1%2Fimg.png">
+                                <img align="right"
+                                    src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png">
+                                <p style="margin-left: 10px; margin-top: 10px;"><b>좋아요123개</b>
+                                    {% if post.id == cm.post_id %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> {{ cm.created_at | timesince }} 전</p>
+                                {% else %}
+                                <p style="line-height: 0.5px; margin-left: 10px;"> {{cm.created_at}}전</p>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <div class="comment_input">
+                                <form method="post" action="/post/comment/{{ post.id }}" id="click">
+                                    {% csrf_token %}
+                                    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FciuH8b%2FbtrNwGm7p8P%2FtPO3dkc4hKsUTle3YOA2b1%2Fimg.png"
+                                        style="width: 35; height:35;">
+                                    <input name="comment" class="input_box" pype="text"
+                                        style="border: none; outline: none;" placeholder="댓글 달기..">
+                                    <a href="#" onclick="document.getElementById('click').submit(); return false"
+                                        style="color:rgba(2, 128, 255, 0.945); position: absolute; margin:5px 5px 5px 30px ;">게시</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 모달 끝 -->
+    <div>
+        {#게시물 표시 부분#}
+        <div class="all_post">
+            <hr>
+            {% for post in posts %}
+            <div class="row">
+                <div class="postbox">
+                    <div style="color: black">
+                        <h3>{{ post.author.user_nick_name }}</h3>
+                    </div>
+                    <img class="img_box" id="show" src="{{ post.images.url }}" alt="...">
+                    <div class="icon_box">
+                        <div>
+                            <span class="material-icons-outlined">favorite_border</span>
+                            <span class="material-icons-outlined">mode_comment</span>
+                            {% if post.author.user_nick_name == user.user_nick_name %}
+                            <span style="cursor:pointer" class="material-icons-outlined"
+                                onclick="location.href='post/edit/{{ post.id }}'" title="수정하기">edit</span>
+                            <span style="cursor:pointer" class="material-icons-outlined"
+                                onclick="location.href='post/delete/{{ post.id }}'" title="삭제하기">delete</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.title }}</h4>
+                        <h5 class="content_text"> {{ post.content }} </h5>
+                        <p class="card-text" style="float: right; margin: auto 10px auto auto">
+                            <small class="text-muted">{{ post.created_at|timesince }}전</small></p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
 
+
+            <div class="row">
+                <div class="postbox">
+                    <div style="color: black">
+                        <h3>hyeon_eee</h3>
+                    </div>
+                    <img class="img_box" id="show" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FomLPv%2FbtrNVgzXzG2%2FCPBDddK4KO9HAKZGj7qPYK%2Fimg.jpg" alt="...">
+                    <div class="icon_box">
+                        <div>
+                            <span class="material-icons-outlined">favorite_border</span>
+                            <span class="material-icons-outlined">mode_comment</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="post_text"><b>hyeon_eee</b>인싸 카페</h4>
+                        <h5 class="content_text">#대구 앞산 카페 #인싸 카페 #카페 데이트</h5>
+                        <p class="card-text" style="float: right; margin: auto 10px auto auto">
+                            <small s="text-muted">12시간 전</small></p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="postbox">
+                    <div style="color: black">
+                        <h3>{{ post.author.user_nick_name }}</h3>
+                    </div>
+                    <img class="img_box" id="show2" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/444cdbb7-4e01-40b6-8f00-02b5557cd5f9/KakaoTalk_20220805_154703469.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221005%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221005T125753Z&X-Amz-Expires=86400&X-Amz-Signature=8b7c5cc8d1eb7b4161f80961644a66bff1caa204a11e4222c3cc27b1896db760&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22KakaoTalk_20220805_154703469.jpg%22&x-id=GetObject" alt="...">
+                    <div class="icon_box">
+                        <div>
+                            <span class="material-icons-outlined">favorite_border</span>
+                            <span class="material-icons-outlined">mode_comment</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.title }}</h4>
+                        <h5 class="content_text"> {{ post.content }} </h5>
+                        <p class="card-text" style="float: right; margin: auto 10px auto auto">
+                            <small s="text-muted">16시간 전</small></p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="postbox">
+                    <div style="color: black">
+                        <h3>{{ post.author.user_nick_name }}</h3>
+                    </div>
+                    <img class="img_box" id="show3" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdPbFSd%2FbtrNGwXGaQB%2FGAyxkivKKe78jMemkunEr1%2Fimg.png" alt="...">
+                    <div class="icon_box">
+                        <div>
+                            <span class="material-icons-outlined">favorite_border</span>
+                            <span class="material-icons-outlined">mode_comment</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.title }}</h4>
+                        <h5 class="content_text"> {{ post.content }} </h5>
+                        <p class="card-text" style="float: right; margin: auto 10px auto auto">
+                            <small s="text-muted">{{ post.created_at|timesince }}전</small></p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="postbox">
+                    <div style="color: black">
+                        <h3>{{ post.author.user_nick_name }}</h3>
+                    </div>
+                    <img class="img_box" id="show4" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png" alt="...">
+                    <div class="icon_box">
+                        <div>
+                            <span class="material-icons-outlined">favorite_border</span>
+                            <span class="material-icons-outlined">mode_comment</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.title }}</h4>
+                        <h5 class="content_text"> {{ post.content }} </h5>
+                        <p class="card-text" style="float: right; margin: auto 10px auto auto">
+                            <small class="text-muted">{{ post.created_at|timesince }}전</small></p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
 </body>
 </html>
