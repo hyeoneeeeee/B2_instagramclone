@@ -5,23 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2896e773-bc8b-4113-8c55-9e98679b2722" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/post/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B2_instagramclone/templates/post/my_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/B2_instagramclone/templates/post/my_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B2_instagramclone/templates/post/post.html" beforeDir="false" afterPath="$PROJECT_DIR$/B2_instagramclone/templates/post/post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/B2_instagramclone/templates/post/write.html" beforeDir="false" afterPath="$PROJECT_DIR$/B2_instagramclone/templates/post/write.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/migrations/__init__.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -86,6 +84,7 @@
       <workItem from="1664542434380" duration="1342000" />
       <workItem from="1664704633673" duration="15326000" />
       <workItem from="1664784010948" duration="23896000" />
+      <workItem from="1664929237165" duration="24272000" />
     </task>
     <servers />
   </component>
