@@ -908,7 +908,9 @@
                     <div style="color: black">
                         <h3>{{ post.author.user_nick_name }}</h3>
                     </div>
-                    <img class="img_box" id="show" src="{{ post.images.url }}" alt="...">
+                    <img class="img_box" id="show"
+                     src="{% get_media_prefix%}{{ post.image }}"
+                     alt="...">
                     <div class="icon_box">
                         <div>
                             <span class="material-icons-outlined">favorite_border</span>
