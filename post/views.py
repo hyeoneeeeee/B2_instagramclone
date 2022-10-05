@@ -60,14 +60,14 @@ def write_comment(request, id):
         print(last_updated_at)
         print(comment)
         post_comment.save()
-        return redirect('/')
+        return redirect(f'/post/{post_comment.post_id}')
 
 
 @login_required
 def delete_comment(request, id):
     my_post = CommentModel.objects.get(id=id)
     my_post.delete()
-    return redirect('/')
+    return redirect(f'/post/{my_post.post_id}')
 
 
 @login_required

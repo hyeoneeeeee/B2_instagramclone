@@ -509,7 +509,8 @@
                 <div class="icon_box">
                     <div>
                         <span class="material-icons-outlined">favorite_border</span>
-                        <span class="material-icons-outlined">mode_comment</span>
+                        <span style="cursor:pointer" class="material-icons-outlined"
+                              onclick="location.href='post/{{ post.id }}'" title="상세보기">mode_comment</span>
                         {% if post.author.user_nick_name == user.user_nick_name %}
                             <span style="cursor:pointer" class="material-icons-outlined"
                                   onclick="location.href='post/edit/{{ post.id }}'"
