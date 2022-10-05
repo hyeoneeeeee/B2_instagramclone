@@ -43,7 +43,7 @@
         width: 700px;
         height : 400px;
         object-fit: contain;
-        background: black;
+        background: #fafafa;
     }
     .icon_box {
         padding: 5px 5px 0px 5px;
@@ -92,11 +92,11 @@
 
     }
     .popup {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: #ffffff;
+        background-color: #fafafa;
         box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
         border-radius: 15px;
         width: 85%;
@@ -109,9 +109,11 @@
         width: 5px;
     }
     .comment_box::-webkit-scrollbar-thumb {
-        background-color: rgb(255, 255, 255);
+        /* background-color: rgb(26, 255, 0); */
         border-radius: 10px;
         background-clip: padding-box;
+        overflow-y: scroll;
+        overflow-y: auto;
         border: 2px solid transparent;
     }
     .comment_box::-webkit-scrollbar-track {
@@ -136,6 +138,9 @@
     }
     #popupinner {
         position: relative;
+        /* background-color: blueviolet; */
+        height: 100%;
+        width: 100%;
     }
     .detail_index {
         /* background-color: aquamarine; */
@@ -145,17 +150,18 @@
         flex-direction: row;
     }
     .photo_area {
-        max-width: 50%;
         width: 50%;
         height: 100%;
-        background-color: #000;
+        /* background-color: #000; */
         display: flex;
-        justify-content: center;
+        justify-content:center;
+        align-items: center;
+        border-right: 1px solid rgb(58, 58, 58, 0.2);
 
     }
     .photo_area > img{
-        object-fit: contain;
         width: 100%;
+        object-fit: contain;
     }
     .comment_area {
         /* background-color: blue; */
@@ -167,20 +173,24 @@
     }
     .writer_box{
         height: 70px;
-        /* background-color: #fafafa; */
+        /* background-color: #352c2c; */
         margin: 10 0 0 0;
     }
     .comment_box{
+        padding-top: 10px;
         min-height: 62%;
-        height: fit-content;
         overflow-y: scroll;
         overflow-x: hidden;
+        overflow-y:hidden;
         overflow-y: auto;
         /* background-color: coral; */
     }
     .comment_input{
         height: 40px;
-        /* background-color: firebrick; */
+        bottom: 10px;
+        position: fixed;
+        width: 50%;
+        background-color: firebrick;
     }
     .state_box{
         /* background-color: darkslategrey; */
@@ -206,7 +216,6 @@
         margin: 10 0 0 10;
     }
 
-{% comment %} "my_profile.html 의 style(시작)" {% endcomment %}
     span {
         padding-right: 5px;
     }
@@ -240,26 +249,6 @@
         height: 100%;
     }
 
-    a:link {
-        color: #000;
-        text-decoration: none;
-
-    }
-
-    a:visited {
-        color: #000;
-        text-decoration: none;
-
-    }
-
-    a:hover {
-        color: black;
-        width: 1100px;
-        margin: auto auto 1rem auto;
-        padding: 60px 20px 20px 20px;
-        /* box-shadow: 0px 0px 3px 0px white; */
-    }
-
     .navbar-light .navbar-nav .nav-link {
         color: rgb(0 0 0);
     }
@@ -289,10 +278,10 @@
     }
 
     .image {
-    width: 320px;
-    height : 320px;
-    object-fit: contain;
-    background: black;
+        width: 320px;
+        height : 320px;
+        object-fit: contain;
+        background: black;
     }
 
     button {
@@ -306,116 +295,128 @@
     }
 
     .comment-text:hover {
-    visibility: hidden
+        visibility: hidden
     }
 
     .comment-text:hover {
-    visibility: visible
+        visibility: visible
     }
 
     .label {
-    padding: 3px 10px;
-    line-height: 13px;
-    color: #ffffff;
-    font-weight: 400;
-    border-radius: 4px;
-    font-size: 75%
+        padding: 3px 10px;
+        line-height: 13px;
+        color: #ffffff;
+        font-weight: 400;
+        border-radius: 4px;
+        font-size: 75%
     }
 
     .round img {
-    border-radius: 100%
+        border-radius: 100%
     }
 
     .label-info {
-    background-color: #1976d2
+        background-color: #1976d2
     }
 
     .label-success {
-    background-color: green
+        background-color: green
     }
 
     .label-danger {
-    background-color: #ef5350
+        background-color: #ef5350
     }
 
     .action-icons a {
-    padding-left: 7px;
+        padding-left: 7px;
     vertical-align: middle;
     color: #99abb4
-    }
+}
 
     .action-icons a:hover {
-    color: #1976d2
+        color: #1976d2
     }
 
     .mt-100 {
-    margin-top: 100px
+        margin-top: 100px
     }
 
 
 
     @media screen and (max-width: 768px) {
-    .center-search{
-        margin-left: 0;
-    }
-    .item{
-        width: 40px;
-    }
-    .navbar-nav {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-direction: row!important;
-        flex-direction: row!important;
-        padding-left: 0;
-        margin-bottom: 0;
-        list-style: none;
-    }
+        .center-search{
+            margin-left: 0;
+        }
+        .item{
+            width: 40px;
+        }
+        .navbar-nav {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
     }
 
     button {
-    background: #fff;
-    outline: none;
-    border: 1px solid rgb(218, 218, 218);
-    margin: 0px px;
-    width: 120px;
-    font-family: "Open sans", sans-serif;
-    font-weight: bolder;
+        background: #fff;
+        outline: none;
+        border: 1px solid rgb(218, 218, 218);
+        margin: 0px px;
+        width: 120px;
+        font-family: "Open sans", sans-serif;
+        font-weight: bolder;
     }
-{% comment %} "my_profile.html 의 style(끝)" {% endcomment %}
+    </style>
 
 
-</style>
+    <script>
+        window.onload = function() {
+            document.querySelector("#show").addEventListener("click", show);
+            document.querySelector("#close").addEventListener("click", close);
+        }
+        function show() {
 
+            document.querySelector(".background").className = "background show";
+        }
+        function close() {
+            document.querySelector(".background").className = "background";
+        }
+        function submit() {
+            $("#click").submit();
+        }
 
-<script>
-    window.onload = function() {
-        document.querySelector("#show").addEventListener("click", show);
-        document.querySelector("#close").addEventListener("click", close);
-    }
-    function show() {
-        document.querySelector(".background").className = "background show";
-    }
-    function close() {
-        document.querySelector(".background").className = "background";
-    }
-</script>
+    </script>
 </head>
 <body>
 
 
- <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" style="width: 100%;height: 50px;position: fixed;z-index: 9999">
-    <div class="container" style="min-width: 800px">
-        <img class="go_home" style="height: 30px; object-fit: contain;cursor: pointer"
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom"
+    style="width: 100%;height: 50px;z-index: 9999">
+   <div class="container" style="min-width: 800px">
+       <img class="go_home" style="height: 30px; object-fit: contain;cursor: pointer"
             src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
-        <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
-        <div style="display: flex; flex-direction: row; align-items: center; ">
-            <span onclick="location.href=''" class="material-icons navi_icons go_home" title="홈페이지">home</span>
-            <span onclick="location.href='/write'" id="add_feed" class="material-icons-outlined navi_icons" title="글쓰기">add_box</span>
-            <span onclick="location.href='/myprofile'" class="material-icons navi_icons person" title="내 프로필">person</span>
-            <span onclick="location.href='/logout'" class="material-icons navi_icons logout" title="로그아웃">logout</span>
-            <span>{{ user.user_nick_name }}님 환영합니다!</span>
-        </div>
-    </div>
+       <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
+       <div style="display: flex; flex-direction: row; align-items: center; ">
+           <span onclick="location.href='/'" class="material-icons navi_icons go_home" title="홈페이지">home</span>
+           <span onclick="location.href='/write'" id="add_feed" class="material-icons-outlined navi_icons" title="글쓰기">add_box</span>
+           <span onclick="location.href='/myprofile'" class="material-icons navi_icons person" title="내 프로필">person</span>
+           <span onclick="location.href='/logout'" class="material-icons navi_icons logout" title="로그아웃">logout</span>
+             <span>{{ user.user_nick_name }}님 환영합니다!</span>
+               <ul class="dropdown-menu" style="left: -130px" aria-labelledby="dropdownMenuButton1">
+                   <li><a class="dropdown-item" href="#">프로필</a></li>
+                   <li><a class="dropdown-item" href="#">저장됨</a></li>
+                   <li>
+                       <hr class="dropdown-divider">
+                   </li>
+                   <li><a class="dropdown-item" href="...">로그아웃</a></li>
+               </ul>
+           </div>
+       </div>
+   </div>
 </nav>
 <div class="background">
     {% for post in posts %}
@@ -426,8 +427,8 @@
                     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR2BxT%2FbtrNwDw4Mfh%2FMclbtlQcdoTkFMLhrIhMKk%2Fimg.png">
                 </div>
                 <div class="detail_index">
-                    <div class="photo_area" style="height: 720px">
-                        <img src="https://t1.daumcdn.net/cfile/tistory/252B114858B05C7C21?original">
+                    <div class="photo_area">
+                        <img src="{{ post.images.url }}">
                     </div>
                     <div class="comment_area">
                         <div class="writer_box">
@@ -437,9 +438,9 @@
                         <div class="comment_box">
                             <div class="writer_comment">
                                 <p style="line-height: 0.5px;"><b>{{ post.author.user_nick_name }}: {{ post.content }}</b></p>
-                                <p><small>{{ post.created_at|timesince }}전</small></p>
+                                <p style="line-height: 10px; margin-left: 30px;"><small>{{ post.created_at|timesince }}전</small></p>
                             </div>
-                            <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;" >
+                            <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;">
                                 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkP38A%2FbtrNANly97k%2F6HZYXrz2efcUjFgXAyKls0%2Fimg.png">
                             </div>
                             {% for cm in comment %}
@@ -449,10 +450,10 @@
                                     <div class="media-body">
                                         <div style="float: right">
                                             {% if cm.author == user %}
-                                                    <a href="/post/comment/delete/{{ cm.id }}">
-                                                        <span class="badge bg-danger">삭제</span>
-                                                    </a>
-                                                    {% endif %}
+                                                <a style="cursor:pointer" class="material-icons-outlined"
+                                                    href="/post/comment/delete/{{ cm.id }}"
+                                                    title="삭제하기">delete</a>
+                                            {% endif %}
                                         </div>
                                             <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{ cm.comment }}</p>
                                             <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at | timesince }} 전</p>
@@ -470,9 +471,9 @@
                             <img align="right" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FV1WP1%2FbtrNGwJ6SsP%2FZ8O25CsyWRbGJfqkqpMrF1%2Fimg.png">
                             <p style="margin-left: 10px; margin-top: 10px;"><b>좋아요123개</b>
                                 {% if post.id == cm.post_id %}
-                                <p style="line-height: 0.5px; margin-left: 10px;"> - {{ cm.created_at | timesince }} 전</p>
+                                <p style="line-height: 0.5px; margin-left: 10px;"> {{ cm.created_at | timesince }} 전</p>
                                 {% else %}
-                                <p style="line-height: 0.5px; margin-left: 10px;"> 전</p>
+                                <p style="line-height: 0.5px; margin-left: 10px;"> {{cm.created_at}}전</p>
                                 {% endif %}
                         </div>
                         <hr>
