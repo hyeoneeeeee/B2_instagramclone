@@ -42,7 +42,7 @@
         width: 700px;
         height : 400px;
         object-fit: contain;
-        background: black;
+        background: #fafafa;
     }
     .icon_box {
         padding: 5px 5px 0px 5px;
@@ -91,11 +91,11 @@
 
     }
     .popup {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: #ffffff;
+        background-color: #fafafa;
         box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
         border-radius: 15px;
         width: 85%;
@@ -108,9 +108,11 @@
         width: 5px;
     }
     .comment_box::-webkit-scrollbar-thumb {
-        background-color: rgb(255, 255, 255);
+        /* background-color: rgb(26, 255, 0); */
         border-radius: 10px;
         background-clip: padding-box;
+        overflow-y: scroll;
+        overflow-y: auto;
         border: 2px solid transparent;
     }
     .comment_box::-webkit-scrollbar-track {
@@ -135,6 +137,9 @@
     }
     #popupinner {
         position: relative;
+        /* background-color: blueviolet; */
+        height: 100%;
+        width: 100%;
     }
     .detail_index {
         /* background-color: aquamarine; */
@@ -144,17 +149,18 @@
         flex-direction: row;
     }
     .photo_area {
-        max-width: 50%;
         width: 50%;
         height: 100%;
-        background-color: #000;
+        /* background-color: #000; */
         display: flex;
-        justify-content: center;
+        justify-content:center;
+        align-items: center;
+        border-right: 1px solid rgb(58, 58, 58, 0.2);
 
     }
     .photo_area > img{
-        object-fit: contain;
         width: 100%;
+        object-fit: contain;
     }
     .comment_area {
         /* background-color: blue; */
@@ -166,12 +172,12 @@
     }
     .writer_box{
         height: 70px;
-        /* background-color: #fafafa; */
+        /* background-color: #352c2c; */
         margin: 10 0 0 0;
     }
     .comment_box{
+        padding-top: 10px;
         min-height: 62%;
-        height: fit-content;
         overflow-y: scroll;
         overflow-x: hidden;
         overflow-y: auto;
@@ -212,6 +218,7 @@
             document.querySelector("#close").addEventListener("click", close);
         }
         function show() {
+
             document.querySelector(".background").className = "background show";
         }
         function close() {
@@ -246,8 +253,8 @@
                     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR2BxT%2FbtrNwDw4Mfh%2FMclbtlQcdoTkFMLhrIhMKk%2Fimg.png">
                 </div>
                 <div class="detail_index">
-                    <div class="photo_area" style="height: 720px">
-                        <img src="https://t1.daumcdn.net/cfile/tistory/252B114858B05C7C21?original">
+                    <div class="photo_area">
+                        <img src="{{ post.images.url }}">
                     </div>
                     <div class="comment_area">
                         <div class="writer_box">
@@ -257,9 +264,9 @@
                         <div class="comment_box">
                             <div class="writer_comment">
                                 <p style="line-height: 0.5px;"><b>{{ post.author.user_nick_name }}: {{ post.content }}</b></p>
-                                <p><small>{{ post.created_at|timesince }}전</small></p>
+                                <p style="line-height: 10px; margin-left: 30px;"><small>{{ post.created_at|timesince }}전</small></p>
                             </div>
-                            <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;" >
+                            <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;">
                                 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkP38A%2FbtrNANly97k%2F6HZYXrz2efcUjFgXAyKls0%2Fimg.png">
                             </div>
                             {% for cm in comment %}

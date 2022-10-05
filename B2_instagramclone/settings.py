@@ -108,14 +108,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGE_CODE = 'ko-kr' # 기본 언어, 저는 'en-us'로 기본으로 놓고 사용합니다.
+LANGUAGES = (
+("ko", "Korean"),
+("en", "English"), # ko, en 말고 다른 언어이름도 추가해주면 되겠죠.
+)
+
+MIDDLEWARE_CLASSES = (
+'django.contrib.sessions.middleware.SessionMiddleware',
+'django.middleware.common.CommonMiddleware',
+'django.middleware.locale.LocaleMiddleware', # session middleware 다음
+
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
