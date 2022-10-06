@@ -840,8 +840,7 @@
                             <div class="comment_box">
                                 <div class="writer_comment">
                                     <p style="line-height: 0.5px;"><b>닉네임: 제목</b></p>
-                                    <p style="line-height: 10px; margin-left: 30px;"><small>{{ post.created_at|timesince
-                                            }}전</small></p>
+                                    <p style="line-height: 10px; margin-left: 30px;"><small>{{ post.created_at|timesince}}전</small></p>
                                 </div>
                                 <div style="display: flex; width: 35px; height: 35px; margin: 10px auto 10px auto;">
                                     <img
@@ -852,10 +851,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="media-body">
-                                            <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{
-                                                cm.comment }}</p>
-                                            <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at |
-                                                timesince }} 전</p>
+                                            <p style="line-height: 15px;"><b>{{ cm.author.user_nick_name }}</b> {{cm.comment }}</p>
+                                            <p style="line-height: 15px; margin-left: 10px;"> {{ cm.created_at |timesince }} 전</p>
                                         </div>
                                     </div>
                                 </div>
@@ -902,37 +899,6 @@
         {#게시물 표시 부분#}
         <div class="all_post">
             <hr>
-            {% for post in posts %}
-            <div class="row">
-                <div class="postbox">
-                    <div style="color: black">
-                        <h3>{{ post.author.user_nick_name }}</h3>
-                    </div>
-                    <img class="img_box" id="show" src="{{ post.images.url }}" alt="...">
-                    <div class="icon_box">
-                        <div>
-                            <span class="material-icons-outlined">favorite_border</span>
-                            <span class="material-icons-outlined">mode_comment</span>
-                            {% if post.author.user_nick_name == user.user_nick_name %}
-                            <span style="cursor:pointer" class="material-icons-outlined"
-                                onclick="location.href='post/edit/{{ post.id }}'" title="수정하기">edit</span>
-                            <span style="cursor:pointer" class="material-icons-outlined"
-                                onclick="location.href='post/delete/{{ post.id }}'" title="삭제하기">delete</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.title }}</h4>
-                        <h5 class="content_text"> {{ post.content }} </h5>
-                        <p class="card-text" style="float: right; margin: auto 10px auto auto">
-                            <small class="text-muted">{{ post.created_at|timesince }}전</small></p>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            {% endfor %}
-
-
             <div class="row">
                 <div class="postbox">
                     <div style="color: black">
@@ -998,7 +964,7 @@
                 </div>
             </div>
             <hr>
-
+            
             <div class="row">
                 <div class="postbox">
                     <div style="color: black">
