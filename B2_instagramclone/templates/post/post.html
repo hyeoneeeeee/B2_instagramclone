@@ -899,6 +899,38 @@
         {#게시물 표시 부분#}
         <div class="all_post">
             <hr>
+
+            {% for post in posts %}
+            <div class="row">
+                <div class="postbox">
+                    <div style="color: black">
+                        <h3>{{ post.author.user_nick_name }}</h3>
+                    </div>
+                    <img class="img_box" id="show" src="{% get_media_prefix%}{{ post.image }}" alt="...">
+                    <div class="icon_box">
+                        <div>
+                            <span class="material-icons-outlined">favorite_border</span>
+                            <span style="cursor:pointer" class="material-icons-outlined"
+                              onclick="location.href='post/{{ post.id }}'" title="상세보기">mode_comment</span>
+                            {% if post.author.user_nick_name == user.user_nick_name %}
+                            <span style="cursor:pointer" class="material-icons-outlined"
+                                onclick="location.href='post/edit/{{ post.id }}'" title="수정하기">edit</span>
+                            <span style="cursor:pointer" class="material-icons-outlined"
+                                onclick="location.href='post/delete/{{ post.id }}'" title="삭제하기">delete</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.title }}</h4>
+                        <h5 class="content_text"> {{ post.content }} </h5>
+                        <p class="card-text" style="float: right; margin: auto 10px auto auto">
+                            <small class="text-muted">{{ post.created_at|timesince }}전</small></p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+
             <div class="row">
                 <div class="postbox">
                     <div style="color: black">
@@ -924,7 +956,7 @@
             <div class="row">
                 <div class="postbox">
                     <div style="color: black">
-                        <h3>{{ post.author.user_nick_name }}</h3>
+                        <h3>DongIkkkkk</h3>
                     </div>
                     <img class="img_box" id="show2" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/444cdbb7-4e01-40b6-8f00-02b5557cd5f9/KakaoTalk_20220805_154703469.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221005%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221005T125753Z&X-Amz-Expires=86400&X-Amz-Signature=8b7c5cc8d1eb7b4161f80961644a66bff1caa204a11e4222c3cc27b1896db760&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22KakaoTalk_20220805_154703469.jpg%22&x-id=GetObject" alt="...">
                     <div class="icon_box">
@@ -934,8 +966,8 @@
                         </div>
                     </div>
                     <div>
-                        <h4 class="post_text"><b>{{ post.author.user_nick_name }}</b> {{ post.title }}</h4>
-                        <h5 class="content_text"> {{ post.content }} </h5>
+                        <h4 class="post_text"><b>DongIkkkkk</b> 날씨가 우중충하네요</h4>
+                        <h5 class="content_text"> 점심뭐먹지 </h5>
                         <p class="card-text" style="float: right; margin: auto 10px auto auto">
                             <small s="text-muted">16시간 전</small></p>
                     </div>
@@ -964,7 +996,7 @@
                 </div>
             </div>
             <hr>
-            
+
             <div class="row">
                 <div class="postbox">
                     <div style="color: black">

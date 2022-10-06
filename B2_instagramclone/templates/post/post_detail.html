@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -141,7 +142,7 @@
 </nav>
 <div class="detail-box">
     <div class="image-area">
-        <img class="image-box" src="{{ post.images.url }}">
+        <img class="image-box" src="{% get_media_prefix%}{{ post.image }}">
     </div>
     <div class="content-area">
         <div>
